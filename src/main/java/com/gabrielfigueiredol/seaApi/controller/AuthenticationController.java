@@ -1,6 +1,9 @@
 package com.gabrielfigueiredol.seaApi.controller;
 
 import com.gabrielfigueiredol.seaApi.dto.AuthenticationDTO;
+import com.gabrielfigueiredol.seaApi.dto.TokenResponseDTO;
+import com.gabrielfigueiredol.seaApi.infra.security.TokenService;
+import com.gabrielfigueiredol.seaApi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,10 +22,16 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO loginData) {
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(loginData.getLogin(), loginData.getSenha());
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
-        return ResponseEntity.ok().build();
+
+        String token = tokenService.generateAuthToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new TokenResponseDTO(token));
     }
 }
