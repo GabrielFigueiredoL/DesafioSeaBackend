@@ -15,5 +15,5 @@ public class AuthenticationDTO {
     @NotNull
     private String login;
     @NotNull
-    private String senha;
+    private String password;
 }

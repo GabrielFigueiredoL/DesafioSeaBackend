@@ -15,14 +15,14 @@ public class RolesInitializer implements CommandLineRunner {
     @Value("${admin.login}")
     private String adminLogin;
 
-    @Value("${admin.senha}")
-    private String adminSenha;
+    @Value("${admin.password}")
+    private String adminPassword;
 
     @Value("${user.login}")
     private String userLogin;
 
-    @Value("${user.senha}")
-    private String userSenha;
+    @Value("${user.password}")
+    private String userPassword;
 
     @Autowired
     private UserRepository userRepository;
@@ -30,13 +30,13 @@ public class RolesInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (userRepository.findByLogin(adminLogin) == null) {
-            String encryptedAdminPassword = new BCryptPasswordEncoder().encode(adminSenha);
+            String encryptedAdminPassword = new BCryptPasswordEncoder().encode(adminPassword);
             User admin = new User(adminLogin, encryptedAdminPassword, UserRole.ADMIN);
             userRepository.save(admin);
         }
 
         if(userRepository.findByLogin(userLogin) == null) {
-            String encryptedUserPassword = new BCryptPasswordEncoder().encode(userSenha);
+            String encryptedUserPassword = new BCryptPasswordEncoder().encode(userPassword);
             User user = new User(userLogin, encryptedUserPassword, UserRole.USER);
             userRepository.save(user);
         }

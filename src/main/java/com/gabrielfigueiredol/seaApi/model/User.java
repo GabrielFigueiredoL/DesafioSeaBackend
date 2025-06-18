@@ -22,12 +22,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
-    private String senha;
+    @Column(name = "senha")
+    private String password;
     private UserRole role;
 
-    public User(String login, String senha, UserRole userRole) {
+    public User(String login, String password, UserRole userRole) {
         this.login = login;
-        this.senha = senha;
+        this.password = password;
         this.role = userRole;
     }
 
@@ -45,7 +46,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.senha;
+        return this.password;
     }
 
     @Override
