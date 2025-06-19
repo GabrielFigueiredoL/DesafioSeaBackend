@@ -1,9 +1,10 @@
 package com.gabrielfigueiredol.seaApi.controller;
 
-import com.gabrielfigueiredol.seaApi.dto.AuthenticationDTO;
-import com.gabrielfigueiredol.seaApi.dto.TokenResponseDTO;
+import com.gabrielfigueiredol.seaApi.dto.Auth.AuthResponseDTO;
+import com.gabrielfigueiredol.seaApi.dto.Auth.AuthenticationDTO;
 import com.gabrielfigueiredol.seaApi.infra.security.TokenService;
 import com.gabrielfigueiredol.seaApi.model.User;
+import com.gabrielfigueiredol.seaApi.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
@@ -26,12 +28,18 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO loginData) {
+    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO loginData, HttpServletResponse response) {
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(loginData.getLogin(), loginData.getPassword());
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
 
         String token = tokenService.generateAuthToken((User) auth.getPrincipal());
+        UserRole userRole = ((User) auth.getPrincipal()).getRole();
 
-        return ResponseEntity.ok(new TokenResponseDTO(token));
+        String cookieValue = String.format("token=%s; Max-Age=%d; Path=/; HttpOnly; SameSite=None%s",
+                token, 18000, "; Secure");
+
+        response.setHeader("Set-Cookie", cookieValue);
+
+        return ResponseEntity.ok(new AuthResponseDTO(userRole.getRole()));
     }
 }

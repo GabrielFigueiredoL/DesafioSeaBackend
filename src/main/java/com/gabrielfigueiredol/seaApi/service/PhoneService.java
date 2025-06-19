@@ -5,7 +5,6 @@ import com.gabrielfigueiredol.seaApi.model.Client;
 import com.gabrielfigueiredol.seaApi.model.Phone;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

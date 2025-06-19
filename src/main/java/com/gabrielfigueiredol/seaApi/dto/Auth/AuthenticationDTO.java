@@ -1,4 +1,4 @@
-package com.gabrielfigueiredol.seaApi.dto;
+package com.gabrielfigueiredol.seaApi.dto.Auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
