@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 public class PhoneDTO {
     @NotBlank(message = "É necessário informar o tipo de telefone")
     private String type;
-    @NotBlank
     @NotBlank(message = "É necessário informar o tipo número do telefone")
     private String number;
 }
