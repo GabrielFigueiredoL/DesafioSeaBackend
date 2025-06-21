@@ -49,6 +49,7 @@ public class ClientService {
 
     public ClientResponseDTO entityToDTO(Client client) {
         ClientResponseDTO dto = new ClientResponseDTO();
+        dto.setId(client.getId());
         dto.setName(client.getName());
         dto.setCpf(formatCpf(client.getCpf()));
         dto.setAddress(addressService.entityToResponseDTO(client.getAddress()));

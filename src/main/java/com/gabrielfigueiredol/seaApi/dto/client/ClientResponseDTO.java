@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientResponseDTO {
+    private Long id;
     private String name;
     private String cpf;
     private List<String> emails;
