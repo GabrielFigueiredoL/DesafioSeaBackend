@@ -77,4 +77,8 @@ public class ClientService {
     public Optional<Client> getById(Long id) {
         return clientRepository.findById(id);
     }
+
+    public void delete(Long id) {
+        clientRepository.deleteById(id);
+    }
 }
