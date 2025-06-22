@@ -59,7 +59,7 @@ public class ClientService {
         dto.setCpf(formatCpf(client.getCpf()));
         dto.setAddress(addressService.entityToResponseDTO(client.getAddress()));
         dto.setPhones(phoneService.entityListToResponseListDTO(client.getPhones()));
-        dto.setEmails(emailService.emailListToString(client.getEmails()));
+        dto.setEmails(emailService.emailListToListDTO(client.getEmails()));
         return dto;
     }
 
@@ -90,13 +90,12 @@ public class ClientService {
         client.setName(updateClientDTO.getName());
         client.setCpf(updateClientDTO.getCpf());
 
-        Address address = addressService.requestToEntity(updateClientDTO.getAddress());
-        client.setAddress(address);
+        addressService.updateAddressEntity(client.getAddress(), updateClientDTO.getAddress());
 
-        List<Phone> phoneList = phoneService.DTOToPhoneList(updateClientDTO.getPhones(), client);
+        List<Phone> phoneList = phoneService.updatePhoneList(updateClientDTO.getPhones(), client);
         client.setPhones(phoneList);
 
-        List<Email> emailList = emailService.DTOToEmailList(updateClientDTO.getEmails(), client);
+        List<Email> emailList = emailService.updateEmailList(updateClientDTO.getEmails(), client);
         client.setEmails(emailList);
 
         clientRepository.save(client);
