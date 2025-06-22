@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressResponseDTO {
-    private String formatedCep;
+    private String cep;
     private String street;
     private String district;
     private String city;

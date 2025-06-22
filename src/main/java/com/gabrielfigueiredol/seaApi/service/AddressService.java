@@ -21,7 +21,7 @@ public class AddressService {
     AddressResponseDTO entityToResponseDTO (Address address) {
         AddressResponseDTO dto = new AddressResponseDTO();
         String formatedCep = formatCep(address.getCep());
-        dto.setFormatedCep(formatedCep);
+        dto.setCep(formatedCep);
         dto.setStreet(address.getStreet());
         dto.setDistrict(address.getDistrict());
         dto.setCity(address.getCity());
