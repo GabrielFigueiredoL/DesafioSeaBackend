@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,5 +72,9 @@ public class ClientService {
             throw new IllegalArgumentException("cpf inválido");
         }
         return formatedCpf;
+    }
+
+    public Optional<Client> getById(Long id) {
+        return clientRepository.findById(id);
     }
 }

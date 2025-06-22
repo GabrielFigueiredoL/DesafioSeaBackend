@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("clients")
@@ -35,5 +36,17 @@ public class ClientController {
     @GetMapping
     public ResponseEntity<List<ClientResponseDTO>> getAll() {
         return ResponseEntity.ok().body(clientService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientResponseDTO> getById(@PathVariable Long id) {
+        Optional<Client> client = clientService.getById(id);
+
+        if (client.isPresent()) {
+            ClientResponseDTO clientResponseDTO = clientService.entityToDTO(client.get());
+            return ResponseEntity.ok(clientResponseDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
