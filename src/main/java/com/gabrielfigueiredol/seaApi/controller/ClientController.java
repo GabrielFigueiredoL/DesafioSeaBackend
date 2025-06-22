@@ -2,6 +2,7 @@ package com.gabrielfigueiredol.seaApi.controller;
 
 import com.gabrielfigueiredol.seaApi.dto.client.ClientResponseDTO;
 import com.gabrielfigueiredol.seaApi.dto.client.CreateClientDTO;
+import com.gabrielfigueiredol.seaApi.dto.client.UpdateClientDTO;
 import com.gabrielfigueiredol.seaApi.model.Client;
 import com.gabrielfigueiredol.seaApi.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,18 @@ public class ClientController {
         if (clientService.getById(id).isPresent()) {
             clientService.delete(id);
             return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @Valid @RequestBody UpdateClientDTO updateClientDTO) {
+        Optional<Client> client = clientService.getById(id);
+        if (client.isPresent()) {
+            clientService.update(client.get(), updateClientDTO);
+
+            return ResponseEntity.ok().body(clientService.entityToDTO(client.get()));
         } else {
             return ResponseEntity.notFound().build();
         }

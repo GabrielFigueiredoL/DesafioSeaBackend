@@ -2,7 +2,11 @@ package com.gabrielfigueiredol.seaApi.service;
 
 import com.gabrielfigueiredol.seaApi.dto.client.ClientResponseDTO;
 import com.gabrielfigueiredol.seaApi.dto.client.CreateClientDTO;
+import com.gabrielfigueiredol.seaApi.dto.client.UpdateClientDTO;
+import com.gabrielfigueiredol.seaApi.model.Address;
 import com.gabrielfigueiredol.seaApi.model.Client;
+import com.gabrielfigueiredol.seaApi.model.Email;
+import com.gabrielfigueiredol.seaApi.model.Phone;
 import com.gabrielfigueiredol.seaApi.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +84,21 @@ public class ClientService {
 
     public void delete(Long id) {
         clientRepository.deleteById(id);
+    }
+
+    public void update(Client client, UpdateClientDTO updateClientDTO) {
+        client.setName(updateClientDTO.getName());
+        client.setCpf(updateClientDTO.getCpf());
+
+        Address address = addressService.requestToEntity(updateClientDTO.getAddress());
+        client.setAddress(address);
+
+        List<Phone> phoneList = phoneService.DTOToPhoneList(updateClientDTO.getPhones(), client);
+        client.setPhones(phoneList);
+
+        List<Email> emailList = emailService.DTOToEmailList(updateClientDTO.getEmails(), client);
+        client.setEmails(emailList);
+
+        clientRepository.save(client);
     }
 }
