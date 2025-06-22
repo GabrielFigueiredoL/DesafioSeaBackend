@@ -1,7 +1,7 @@
 package com.gabrielfigueiredol.seaApi.controller;
 
-import com.gabrielfigueiredol.seaApi.dto.Auth.AuthResponseDTO;
-import com.gabrielfigueiredol.seaApi.dto.Auth.AuthenticationDTO;
+import com.gabrielfigueiredol.seaApi.dto.auth.AuthResponseDTO;
+import com.gabrielfigueiredol.seaApi.dto.auth.AuthenticationDTO;
 import com.gabrielfigueiredol.seaApi.infra.security.TokenService;
 import com.gabrielfigueiredol.seaApi.model.User;
 import com.gabrielfigueiredol.seaApi.model.UserRole;

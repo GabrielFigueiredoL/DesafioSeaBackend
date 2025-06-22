@@ -1,6 +1,5 @@
-package com.gabrielfigueiredol.seaApi.dto.Auth;
+package com.gabrielfigueiredol.seaApi.dto.auth;
 
-import com.gabrielfigueiredol.seaApi.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
