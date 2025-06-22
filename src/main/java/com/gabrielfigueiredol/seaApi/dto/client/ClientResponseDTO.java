@@ -1,5 +1,6 @@
 package com.gabrielfigueiredol.seaApi.dto.client;
 
+import com.gabrielfigueiredol.seaApi.dto.EmailDTO;
 import com.gabrielfigueiredol.seaApi.dto.PhoneDTO;
 import com.gabrielfigueiredol.seaApi.dto.address.AddressResponseDTO;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class ClientResponseDTO {
     private Long id;
     private String name;
     private String cpf;
-    private List<String> emails;
+    private List<EmailDTO> emails;
     private List<PhoneDTO> phones;
     private AddressResponseDTO address;
 }

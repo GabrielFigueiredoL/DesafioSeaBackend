@@ -31,6 +31,15 @@ public class AddressService {
         return dto;
     }
 
+    public void updateAddressEntity(Address existingAddress, AddressRequestDTO addressDTO) {
+        existingAddress.setCep(cleanCep(addressDTO.getCep()));
+        existingAddress.setStreet(addressDTO.getStreet());
+        existingAddress.setDistrict(addressDTO.getDistrict());
+        existingAddress.setCity(addressDTO.getCity());
+        existingAddress.setStateCode(addressDTO.getStateCode());
+        existingAddress.setComplement(addressDTO.getComplement());
+    }
+
     String formatCep(String cep) {
         return cep.substring(0, 5) + "-" + cep.substring(5);
     }

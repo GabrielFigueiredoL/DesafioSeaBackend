@@ -36,6 +36,15 @@ public class Phone {
         PhoneType(String label) {
             this.label = label;
         }
+
+        public static PhoneType fromLabel(String label) {
+            for (PhoneType type : values()) {
+                if (type.label.equalsIgnoreCase(label)) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Tipo de telefone inválido: " + label);
+        }
     }
 
     public Phone(String type, String number) {

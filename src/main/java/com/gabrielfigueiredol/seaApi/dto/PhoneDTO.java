@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Getter
 public class PhoneDTO {
+    private Long id;
     @NotBlank(message = "É necessário informar o tipo de telefone")
     private String type;
     @NotBlank(message = "É necessário informar o tipo número do telefone")
