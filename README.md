@@ -1,7 +1,7 @@
 
 # Sea Tecnologia - Desafio Backend opção 1
 
-Este projeto é uma API REST desenvolvida para solucionar os desafios propostos.
+Este projeto é uma API REST desenvolvida para solucionar os desafios propostos.<br>
 É possivel acessar o frontend da aplicação [aqui](https://github.com/GabrielFigueiredoL/DesafioSeaFrontend).
 
 ## Stack utilizada
